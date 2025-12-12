@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Advanced Task Manager</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div style="display:flex;flex-direction:column">
+      <h1>Task Manager — Advanced</h1>
+      <div class="small">Organize tasks • tags • priorities • due dates • drag & drop • localStorage</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="notify-btn" title="Enable due reminders (notifications)">Enable Reminders</button>
+      <button class="btn ghost" id="clear-all">Clear All</button>
+    </div>
+  </header>
+
+  <!-- Add task panel -->
+  <div class="panel">
+    <form id="addForm" class="add" onsubmit="return false;">
+      <input id="taskTitle" class="input" type="text" placeholder="Add new task (press Enter) — e.g. 'Finish report' " required />
+      <input id="taskDue" class="input" type="date" />
+      <select id="taskPriority" class="input" style="width:140px">
+        <option value="medium">Priority: Medium</option>
+        <option value="high">Priority: High</option>
+        <option value="low">Priority: Low</option>
+      </select>
+      <input id="taskTags" class="input" type="text" placeholder="tags (comma separated)" style="width:180px" />
+      <button id="addBtn" class="btn" title="Add task">Add</button>
+    </form>
+  </div>
+
+  <main>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><strong>Filters</strong></div>
+          <div class="small muted" id="stats">0 tasks</div>
+        </div>
+        <div class="filters" id="filterList" style="margin-top:10px">
+          <div class="chip active" data-filter="all">All</div>
+          <div class="chip" data-filter="active">Active</div>
+          <div class="chip" data-filter="completed">Completed</div>
+          <div class="chip" data-filter="today">Today</div>
+          <div class="chip" data-filter="overdue">Overdue</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div><strong>Sort</strong></div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <select id="sortBy" class="input">
+            <option value="created-desc">Created (new)</option>
+            <option value="created-asc">Created (old)</option>
+            <option value="due-asc">Due date (soon)</option>
+            <option value="due-desc">Due date (late)</option>
+            <option value="priority-desc">Priority (high)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div><strong>Search</strong></div>
+        <div style="margin-top:8px" class="search">
+          <input id="search" class="input" placeholder="Search title, desc, tags..." />
+        </div>
+      </div>
+
+      <div class="card small">
+        Tip: Use drag & drop to reorder tasks. Click on a task title to edit.
+      </div>
+    </aside>
+
+    <!-- Tasks -->
+    <section>
+      <div class="card">
+        <div class="tasks-head">
+          <div><strong>Tasks</strong></div>
+          <div class="small muted"><span id="visibleCount">0</span> visible</div>
+        </div>
+
+        <div id="taskList" class="task-list" aria-live="polite"></div>
+
+        <div id="empty" class="empty" style="display:none">No tasks yet. Add your first task ✨</div>
+      </div>
+      <footer class="small">Made with HTML • CSS • JavaScript — data stored locally in your browser.</footer>
+    </section>
+  </main>
+</div>
+
+<!-- Edit Modal -->
+<div id="modal" style="display:none;" role="dialog" aria-modal="true">
+  <div class="modal-back" id="modalBack">
+    <div class="modal" id="modalContent">
+      <h3>Edit Task</h3>
+      <form id="editForm" onsubmit="return false;" style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <input id="editTitle" class="input" required />
+        <textarea id="editDesc" class="input" rows="3" placeholder="Optional description"></textarea>
+        <div style="display:flex;gap:8px">
+          <input id="editDue" class="input" type="date" />
+          <select id="editPriority" class="input">
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
+          <input id="editTags" class="input" placeholder="tags, comma separated" />
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn ghost" id="cancelEdit">Cancel</button>
+          <button class="btn" id="saveEdit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" style="display:none" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
