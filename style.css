@@ -1,0 +1,58 @@
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --muted:#6b7280; --accent:#4f46e5; --danger:#ef4444;
+  --success:#10b981; --shadow: 0 6px 18px rgba(15,23,42,0.08);
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#0f172a;background:linear-gradient(180deg,#f6f7fb, #eef2ff 80%);}
+.app{max-width:980px;margin:28px auto;padding:20px;min-height:80vh}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{font-size:20px;margin:0;color:#0f172a}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(79,70,229,0.12)}
+.panel{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+form.add{display:flex;gap:10px;flex:1;align-items:flex-start}
+.input, select, textarea{padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:white;font-size:14px;min-width:0}
+.input[type="text"]{flex:1}
+.small{font-size:13px;color:var(--muted)}
+main{display:grid;grid-template-columns:320px 1fr;gap:16px;margin-top:16px}
+@media (max-width:900px){ main{grid-template-columns:1fr;}}
+/* Sidebar filters */
+.sidebar{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
+.filters{display:flex;flex-direction:column;gap:6px}
+.chip{padding:8px 10px;border-radius:999px;background:#f3f4f6;color:#111827;cursor:pointer;border:1px solid transparent}
+.chip.active{background:var(--accent);color:white;border-color:rgba(79,70,229,0.2)}
+.search{display:flex;gap:8px}
+/* Task list */
+.tasks-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.task-list{display:flex;flex-direction:column;gap:8px;min-height:200px}
+.task{background:linear-gradient(180deg,#fff,#fbfbff);padding:12px;border-radius:10px;display:flex;gap:12px;align-items:flex-start;border:1px solid #eef2ff}
+.task.dragging{opacity:.6;transform:scale(.995)}
+.checkbox{width:18px;height:18px;border-radius:4px;border:1px solid #d1d5db;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.checkbox.checked{background:var(--success);border-color:rgba(16,185,129,0.2);color:white}
+.task-info{flex:1;min-width:0}
+.title{font-weight:600;margin:0;display:flex;gap:8px;align-items:center}
+.title .meta{font-weight:500;font-size:13px;color:var(--muted)}
+.desc{margin:6px 0 0;color:#374151;font-size:13px}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.badge{padding:4px 8px;border-radius:999px;background:#f1f5f9;color:#0f172a;font-size:12px;border:1px solid #e2e8f0}
+.priority-high{background:#fee2e2;color:var(--danger);border-color:rgba(239,68,68,0.08)}
+.priority-med{background:#fff4e6;color:#c2410c;border-color:rgba(194,65,12,0.06)}
+.priority-low{background:#ecfdf5;color:var(--success);border-color:rgba(16,185,129,0.06)}
+.task-actions{display:flex;gap:6px}
+.icon-btn{background:transparent;border:none;padding:6px;border-radius:8px;cursor:pointer;color:var(--muted)}
+.muted{color:var(--muted)}
+.empty{padding:16px;text-align:center;color:var(--muted)}
+footer.small{text-align:center;margin-top:18px;color:var(--muted)}
+/* modal */
+.modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:flex;align-items:center;justify-content:center;z-index:60}
+.modal{background:var(--card);padding:18px;border-radius:12px;width:92%;max-width:680px;box-shadow:var(--shadow)}
+/* toast */
+.toast{position:fixed;right:16px;bottom:16px;background:#111827;color:white;padding:12px 16px;border-radius:10px;box-shadow:var(--shadow)}
+/* due label */
+.due-soon{color:#b45309;font-weight:600}
+.overdue{color:var(--danger);font-weight:700}
+/* small helpers */
+.nowrap{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
